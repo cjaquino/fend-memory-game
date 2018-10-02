@@ -87,12 +87,16 @@ function compareCards(e, open_card) {
     //check if there's anything stored in the open_cards array
     //if there is, compare classes and see if they matched
     //otherwise, store the selected card class in the open_cards array
-      const sel_card_classes = e.target.querySelector('i').classList;
-      if(sel_card_classes.value == open_card[0].querySelector('i').classList.value){
-        alert('cards match!')
+      const sel_card = e.target;
+      if(sel_card.querySelector('i').classList.value == open_card[0].querySelector('i').classList.value){
+        if (sel_card === open_card[0]){
+          console.log('same card selected');
+        } else {
+          console.log('cards match!')
+        }
         //function::cards match: lock cards in match class
       } else {
-        alert('cards dont match');
+        console.log('cards dont match');
         //function::cards dont match: hide the cards again and clear open_card;
         cardNotMatched(e, open_card);
         console.log(open_card);
