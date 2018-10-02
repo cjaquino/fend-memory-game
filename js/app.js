@@ -72,12 +72,44 @@ shuffleDeck(deck);
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
- function openCard(e) {
-   if(e.target.nodeName === 'LI') {
-     e.target.classList.add('show','open');
-   }
- };
+function openCard(e) {
+ if(e.target.nodeName === 'LI') {
+   e.target.classList.add('show','open');
+ }
+};
 
+//take the class of the selected i element and store it in an array
+function storeCard(e, open_cards) {
+  console.log('store card fn running')
+  const sel_card_class = e.target.querySelector('i').classList;
+  console.log(sel_card_class);
+  open_cards.push(sel_card_class);
+  console.log('store card fn running')
+}
+
+function checkCard(e, open_cards) {
+  console.log('check card fn running')
+  if(e.target.nodeName === 'LI') {
+    //check if there's anything stored in the open_cards array
+    //if there is, compare classes and see if they matched
+    //otherwise, store the selected card class in the open_cards array
+    if(open_cards.length > 0) {
+      const sel_card_classes = e.target.querySelector('i').classList;
+      if(sel_card_classes.value == open_cards[0].value){
+        alert('cards match!')
+      } else {
+        alert('cards dont match');
+
+      }
+    } else {
+      storeCard(e, open_cards);
+    }
+  }
+  console.log('check fn completed')
+}
+let open_cards = [];
 deck_element.addEventListener('click', function(e){
+
   openCard(e);
+  checkCard(e, open_cards);
 });
