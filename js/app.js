@@ -92,12 +92,10 @@ function compareCards(e, open_card) {
         if (sel_card === open_card[0]){
           console.log('same card selected');
         } else {
-          console.log('cards match!')
           cardMatched(e, open_card);
         }
         //function::cards match: lock cards in match class
       } else {
-        console.log('cards dont match');
         //function::cards dont match: hide the cards again and clear open_card;
         cardNotMatched(e, open_card);
         console.log(open_card);
@@ -127,8 +125,15 @@ function cardMatched(e, open_card) {
 //declare empty open cards array to store open cards
 let open_card = [];
 
+//declare counter
+let my_counter = 0;
+
+function incrementCounter(ctr) {
+  ctr = ctr + 1;
+}
+
 deck_element.addEventListener('click', function(e){
-  if(e.target.nodeName === 'LI') {
+  if(e.target.nodeName ===  'LI') {
     openCard(e);
     if (open_card.length == 0) {
       storeCard(e, open_card);
@@ -136,7 +141,9 @@ deck_element.addEventListener('click', function(e){
       compareCards(e, open_card);
     }
   }
-  //function::increment move counter
 
+  //function::increment move counter
+  incrementCounter(my_counter);
+  console.log(my_counter);
   //check if all cards are matched and display message with final score
 });
