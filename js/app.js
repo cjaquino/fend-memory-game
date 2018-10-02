@@ -93,6 +93,7 @@ function compareCards(e, open_card) {
           console.log('same card selected');
         } else {
           console.log('cards match!')
+          cardMatched(e, open_card);
         }
         //function::cards match: lock cards in match class
       } else {
@@ -107,8 +108,20 @@ function compareCards(e, open_card) {
 function cardNotMatched(e, open_card) {
   open_card[0].classList.toggle('show');
   open_card[0].classList.toggle('open');
+  e.target.classList.toggle('show');
+  e.target.classList.toggle('open');
   open_card.pop();
-  e.target.setAttribute('class','card');
+  // e.target.setAttribute('class','card');
+}
+
+function cardMatched(e, open_card) {
+  open_card[0].classList.toggle('show');
+  open_card[0].classList.toggle('open');
+  open_card[0].classList.toggle('match');
+  e.target.classList.toggle('show');
+  e.target.classList.toggle('open');
+  e.target.classList.toggle('match');
+  open_card.pop();
 }
 
 //declare empty open cards array to store open cards
