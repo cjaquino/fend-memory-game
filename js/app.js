@@ -73,14 +73,12 @@ shuffleDeck(deck);
  */
 
 function openCard(e) {
- if(e.target.nodeName === 'LI') {
-   e.target.classList.add('show','open');
- }
+ e.target.classList.add('show','open');
 };
 
 //take the class of the selected i element and store it in an array
 function storeCard(e, open_card) {
-  const sel_card = e.target.querySelector('i');
+  const sel_card = e.target;
   open_card.push(sel_card);
 }
 
@@ -90,7 +88,7 @@ function compareCards(e, open_card) {
     //if there is, compare classes and see if they matched
     //otherwise, store the selected card class in the open_cards array
       const sel_card_classes = e.target.querySelector('i').classList;
-      if(sel_card_classes.value == open_card[0].classList.value){
+      if(sel_card_classes.value == open_card[0].querySelector('i').classList.value){
         alert('cards match!')
         //function::cards match: lock cards in match class
       } else {
@@ -103,7 +101,8 @@ function compareCards(e, open_card) {
 }
 
 function cardNotMatched(e, open_card) {
-  console.log(open_card[0]);
+  open_card[0].classList.toggle('show');
+  open_card[0].classList.toggle('open');
   open_card.pop();
   e.target.setAttribute('class','card');
 }
@@ -112,14 +111,14 @@ function cardNotMatched(e, open_card) {
 let open_card = [];
 
 deck_element.addEventListener('click', function(e){
-
-  openCard(e);
-  if (open_card.length == 0) {
-    storeCard(e, open_card);
-  } else {
-    compareCards(e, open_card);
+  if(e.target.nodeName === 'LI') {
+    openCard(e);
+    if (open_card.length == 0) {
+      storeCard(e, open_card);
+    } else {
+      compareCards(e, open_card);
+    }
   }
-
   //function::increment move counter
 
   //check if all cards are matched and display message with final score
