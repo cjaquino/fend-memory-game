@@ -25,36 +25,42 @@ function shuffle(array) {
     return array;
 }
 
+//select deck class
+const deck_element = document.querySelector(".deck");
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-const shuffled_deck = shuffle(deck);
-const deck_element = document.querySelector(".deck");
-const fragment = document.createDocumentFragment();
+ function shuffleDeck(deck){
+   const shuffled_deck = shuffle(deck);
+   const fragment = document.createDocumentFragment();
 
-for (card of shuffled_deck) {
-  //create li card element
-  const newCard = document.createElement('li');
-  newCard.setAttribute('class','card');
+   for (card of shuffled_deck) {
+     //create li card element
+     const newCard = document.createElement('li');
+     newCard.setAttribute('class','card');
 
-  //create icon element for card with appropriate class
-  const newIcon = document.createElement('i');
-  newIcon.setAttribute('class','fa');
-  newIcon.setAttribute('class',card);
+     //create icon element for card with appropriate class
+     const newIcon = document.createElement('i');
+     newIcon.setAttribute('class','fa');
+     newIcon.setAttribute('class',card);
 
-  //append icon to li
-  newCard.appendChild(newIcon);
+     //append icon to li
+     newCard.appendChild(newIcon);
 
-  //append li with child to fragment element
-  fragment.appendChild(newCard);
-}
+     //append li with child to fragment element
+     fragment.appendChild(newCard);
+   }
 
-//append fragment to deck_element
-deck_element.innerHTML = "";
-deck_element.appendChild(fragment);
+   //append fragment to deck_element
+   deck_element.innerHTML = "";
+   deck_element.appendChild(fragment);
+ }
+
+shuffleDeck(deck);
 
 /*
  * set up the event listener for a card. If a card is clicked:
