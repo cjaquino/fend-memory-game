@@ -80,15 +80,12 @@ function openCard(e) {
 
 //take the class of the selected i element and store it in an array
 function storeCard(e, open_cards) {
-  console.log('store card fn running')
   const sel_card_class = e.target.querySelector('i').classList;
   console.log(sel_card_class);
   open_cards.push(sel_card_class);
-  console.log('store card fn running')
 }
 
 function checkCard(e, open_cards) {
-  console.log('check card fn running')
   if(e.target.nodeName === 'LI') {
     //check if there's anything stored in the open_cards array
     //if there is, compare classes and see if they matched
@@ -105,9 +102,11 @@ function checkCard(e, open_cards) {
       storeCard(e, open_cards);
     }
   }
-  console.log('check fn completed')
 }
+
+//declare empty open cards array to store open cards
 let open_cards = [];
+
 deck_element.addEventListener('click', function(e){
 
   openCard(e);
