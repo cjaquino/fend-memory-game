@@ -130,6 +130,7 @@ let move_counter = 0;
 
 function incrementCounter() {
   move_counter++;
+  document.querySelector(".moves").textContent = move_counter;
 }
 
 deck_element.addEventListener('click', function(e){
