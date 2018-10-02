@@ -1,14 +1,14 @@
 /*
  * Create a list that holds all of your cards
  */
-const deck = ["diamond","diamond",
-              "plane","plane",
-              "anchor","anchor",
-              "bolt","bolt",
-              "cube","cube",
-              "leaf","leaf",
-              "bicycle","bicycle",
-              "bomb","bomb"]
+const deck = ["fa-diamond","fa-diamond",
+              "fa-paper-plane-o","fa-paper-plane-o",
+              "fa-anchor","fa-anchor",
+              "fa-bolt","fa-bolt",
+              "fa-cube","fa-cube",
+              "fa-leaf","fa-leaf",
+              "fa-bicycle","fa-bicycle",
+              "fa-bomb","fa-bomb"]
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -32,7 +32,29 @@ function shuffle(array) {
  *   - add each card's HTML to the page
  */
 const shuffled_deck = shuffle(deck);
+const deck_element = document.querySelector(".deck");
+const fragment = document.createDocumentFragment();
 
+for (card of shuffled_deck) {
+  //create li card element
+  const newCard = document.createElement('li');
+  newCard.setAttribute('class','card');
+
+  //create icon element for card with appropriate class
+  const newIcon = document.createElement('i');
+  newIcon.setAttribute('class','fa');
+  newIcon.setAttribute('class',card);
+
+  //append icon to li
+  newCard.appendChild(newIcon);
+
+  //append li with child to fragment element
+  fragment.appendChild(newCard);
+}
+
+//append fragment to deck_element
+deck_element.innerHTML = "";
+deck_element.appendChild(fragment);
 
 /*
  * set up the event listener for a card. If a card is clicked:
