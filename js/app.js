@@ -126,10 +126,10 @@ function cardMatched(e, open_card) {
 let open_card = [];
 
 //declare counter
-let my_counter = 0;
+let move_counter = 0;
 
-function incrementCounter(ctr) {
-  ctr = ctr + 1;
+function incrementCounter() {
+  move_counter++;
 }
 
 deck_element.addEventListener('click', function(e){
@@ -143,7 +143,7 @@ deck_element.addEventListener('click', function(e){
   }
 
   //function::increment move counter
-  incrementCounter(my_counter);
-  console.log(my_counter);
+  incrementCounter();
+
   //check if all cards are matched and display message with final score
 });
