@@ -81,34 +81,39 @@ function openCard(e) {
 //take the class of the selected i element and store it in an array
 function storeCard(e, open_cards) {
   const sel_card_class = e.target.querySelector('i').classList;
-  console.log(sel_card_class);
+  // console.log(sel_card_class);
   open_cards.push(sel_card_class);
 }
 
-function checkCard(e, open_cards) {
+function compareCards(e, open_card) {
   if(e.target.nodeName === 'LI') {
     //check if there's anything stored in the open_cards array
     //if there is, compare classes and see if they matched
     //otherwise, store the selected card class in the open_cards array
-    if(open_cards.length > 0) {
       const sel_card_classes = e.target.querySelector('i').classList;
-      if(sel_card_classes.value == open_cards[0].value){
+      if(sel_card_classes.value == open_card[0].value){
         alert('cards match!')
+        //function::cards match: lock cards in match class
       } else {
         alert('cards dont match');
-
+        //function::cards dont match: hide the cards again
       }
-    } else {
-      storeCard(e, open_cards);
-    }
   }
 }
 
 //declare empty open cards array to store open cards
-let open_cards = [];
+let open_card = [];
 
 deck_element.addEventListener('click', function(e){
 
   openCard(e);
-  checkCard(e, open_cards);
+  if (open_card.length == 0) {
+    storeCard(e, open_card);
+  } else {
+    compareCards(e, open_card);
+  }
+
+  //function::increment move counter
+
+  //check if all cards are matched and display message with final score
 });
