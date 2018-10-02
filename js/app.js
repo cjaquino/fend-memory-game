@@ -79,10 +79,10 @@ function openCard(e) {
 };
 
 //take the class of the selected i element and store it in an array
-function storeCard(e, open_cards) {
+function storeCard(e, open_card) {
   const sel_card_class = e.target.querySelector('i').classList;
   // console.log(sel_card_class);
-  open_cards.push(sel_card_class);
+  open_card.push(sel_card_class);
 }
 
 function compareCards(e, open_card) {
@@ -96,10 +96,12 @@ function compareCards(e, open_card) {
         //function::cards match: lock cards in match class
       } else {
         alert('cards dont match');
-        //function::cards dont match: hide the cards again
+        //function::cards dont match: hide the cards again and clear open_card;
+        cardNotMatched(e, open_card);
       }
   }
 }
+
 
 //declare empty open cards array to store open cards
 let open_card = [];
