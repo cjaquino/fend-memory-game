@@ -1,7 +1,14 @@
 /*
  * Create a list that holds all of your cards
  */
-
+const deck = ["diamond","diamond",
+              "plane","plane",
+              "anchor","anchor",
+              "bolt","bolt",
+              "cube","cube",
+              "leaf","leaf",
+              "bicycle","bicycle",
+              "bomb","bomb"]
 
 /*
  * Display the cards on the page
