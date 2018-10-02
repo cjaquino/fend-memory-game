@@ -98,7 +98,6 @@ function compareCards(e, open_card) {
       } else {
         //function::cards dont match: hide the cards again and clear open_card;
         cardNotMatched(e, open_card);
-        console.log(open_card);
       }
   }
 }
