@@ -147,3 +147,10 @@ deck_element.addEventListener('click', function(e){
 
   //check if all cards are matched and display message with final score
 });
+
+//reset the game. Close and shuffle cards
+document.querySelector(".restart").addEventListener('click', function(e) {
+  shuffleDeck(deck);
+  move_counter = 0;
+  document.querySelector(".moves").textContent = move_counter;
+})
