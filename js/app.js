@@ -83,7 +83,6 @@ function storeCard(e, open_card) {
 }
 
 function compareCards(e, open_card) {
-  if(e.target.nodeName === 'LI') {
     //check if there's anything stored in the open_cards array
     //if there is, compare classes and see if they matched
     //otherwise, store the selected card class in the open_cards array
@@ -97,9 +96,10 @@ function compareCards(e, open_card) {
         //function::cards match: lock cards in match class
       } else {
         //function::cards dont match: hide the cards again and clear open_card;
-        cardNotMatched(e, open_card);
+        setTimeout(function myFunc() {
+          cardNotMatched(e, open_card)
+        }, 500);
       }
-  }
 }
 
 function cardNotMatched(e, open_card) {
