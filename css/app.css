@@ -28,7 +28,7 @@ body {
     flex-direction: column;
 }
 
-h1 {
+header h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     margin-bottom: 0;
@@ -111,5 +111,64 @@ header p {
 
 .score-panel .restart {
     float: right;
+    cursor: pointer;
+}
+
+/* https://www.w3schools.com/howto/howto_css_modals.asp */
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.modal-content h1 {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.modal-content p {
+  text-align: center;
+}
+
+/* Modal Stars */
+#modal_stars {
+    list-style: none;
+    display: flex;
+    margin: 2rem auto;
+    padding: 0;
+    justify-content: center;
+}
+
+
+/* The Close Button */
+#modal_close {
+    color: #aaa;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: right;
+    margin-bottom: 0;
+}
+
+#modal_close:hover,
+#modal_close:focus {
+    color: black;
+    text-decoration: none;
     cursor: pointer;
 }

@@ -113,6 +113,26 @@ function cardNotMatched(e, open_card) {
 
 let num_matches = 8;
 
+// https://www.w3schools.com/howto/howto_css_modals.asp
+// Get the modal elements
+const modal = document.getElementById('myModal');
+const modal_close = document.getElementById("modal_close");
+const modal_stars = document.getElementById("modal_stars");
+const modal_time = document.getElementById("modal_time");
+const seconds = document.getElementById("seconds");
+const minutes = document.getElementById("minutes");
+// When the user clicks on <span> (x), close the modal
+modal_close.addEventListener("click", function() {
+    modal.style.display = "none";
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener("click", function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+})
+
 function cardMatched(e, open_card) {
   open_card[0].classList.toggle('show');
   open_card[0].classList.toggle('open');
@@ -126,6 +146,20 @@ function cardMatched(e, open_card) {
     game_started = 0;
     game_completed = 1;
   }
+
+  //On matching all cards, display modal and update content
+  if(game_completed){
+    modal.style.display = "block";
+    if (num_stars == 3){
+      modal_stars.innerHTML = '<li><i class="fa fa-3x fa-star"></i></li><li><i class="fa fa-3x fa-star"></i></li><li><i class="fa fa-3x fa-star"></i></li>';
+    } else if (num_stars == 2) {
+      modal_stars.innerHTML = '<li><i class="fa fa-3x fa-star"></i></li><li><i class="fa fa-3x fa-star"></i></li>';
+    } else {
+      modal_stars.innerHTML = '<li><i class="fa fa-3x fa-star"></i></li>';
+    }
+    modal_time.innerHTML = minutes + " min " + seconds + " s";
+    modal_moves.innerHTML = move_counter;
+  }
 }
 
 //declare empty open cards array to store open cards
@@ -133,18 +167,26 @@ let open_card = [];
 
 //declare counter
 let move_counter = 0;
+let num_stars = 3;
 
 function incrementCounter() {
   move_counter++;
   document.querySelector(".moves").textContent = move_counter;
+  if (move_counter > 30 && move_counter <= 40) {
+    document.querySelector(".stars").innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li>";
+    num_stars = 2;
+  } else if (move_counter > 40) {
+    document.querySelector(".stars").innerHTML =  " <li><i class='fa fa-star'></i></li>";
+    num_stars = 1;
+  }
 }
 
 //timer based off of stack overflow solution:https://stackoverflow.com/questions/29971898/how-to-create-an-accurate-timer-in-javascript
 let game_started = 0;
 let game_completed = 0;
 let start_time = Date.now();
-const seconds = document.getElementById("seconds");
-const minutes = document.getElementById("minutes");
+// const seconds = document.getElementById("seconds");
+// const minutes = document.getElementById("minutes");
 
 
 function timer() {
