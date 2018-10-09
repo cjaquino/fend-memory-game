@@ -119,8 +119,7 @@ const modal = document.getElementById('myModal');
 const modal_close = document.getElementById("modal_close");
 const modal_stars = document.getElementById("modal_stars");
 const modal_time = document.getElementById("modal_time");
-const seconds = document.getElementById("seconds");
-const minutes = document.getElementById("minutes");
+
 // When the user clicks on <span> (x), close the modal
 modal_close.addEventListener("click", function() {
     modal.style.display = "none";
@@ -157,7 +156,7 @@ function cardMatched(e, open_card) {
     } else {
       modal_stars.innerHTML = '<li><i class="fa fa-3x fa-star"></i></li>';
     }
-    modal_time.innerHTML = minutes + " min " + seconds + " s";
+    modal_time.innerHTML = minutes.textContent + " min " + seconds.textContent + " s";
     modal_moves.innerHTML = move_counter;
   }
 }
@@ -185,8 +184,8 @@ function incrementCounter() {
 let game_started = 0;
 let game_completed = 0;
 let start_time = Date.now();
-// const seconds = document.getElementById("seconds");
-// const minutes = document.getElementById("minutes");
+const seconds = document.getElementById("seconds");
+const minutes = document.getElementById("minutes");
 
 
 function timer() {
