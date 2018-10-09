@@ -132,18 +132,47 @@ function incrementCounter() {
   document.querySelector(".moves").textContent = move_counter;
 }
 
+//timer based off of stack overflow solution:https://stackoverflow.com/questions/29971898/how-to-create-an-accurate-timer-in-javascript
+let game_started = 0;
+let game_completed = 0;
+let start_time = Date.now();
+const seconds = document.getElementById("seconds");
+const minutes = document.getElementById("minutes");
+
+
+function timer() {
+  if (game_started){
+    const raw_millis = Date.now() - start_time;
+    const mins = Math.floor(raw_millis/60000);
+    const secs = Math.floor((raw_millis%60000)/1000);
+    seconds.innerHTML = secs;
+    minutes.innerHTML = mins;
+    console.log(raw_millis);
+  }
+}
+
+setInterval(timer, 1000);
+
 deck_element.addEventListener('click', function(e){
   if(e.target.nodeName ===  'LI') {
-    openCard(e);
-    if (open_card.length == 0) {
-      storeCard(e, open_card);
-    } else {
-      compareCards(e, open_card);
+    //if game hast been started, start timer
+    if (!game_started) {
+      game_started = 1;
+      start_time = Date.now();
+      // setInterval(timer(start_time),1000);
+      // console.log("timer started");
     }
-  }
+    if(!e.target.classList.contains("open")){
+      openCard(e);
+      incrementCounter();
+      if (open_card.length == 0) {
+        storeCard(e, open_card);
+      } else {
+        compareCards(e, open_card);
+      }
+    }
 
-  //function::increment move counter
-  incrementCounter();
+  }
 
   //check if all cards are matched and display message with final score
 });

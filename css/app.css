@@ -31,6 +31,12 @@ body {
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+    margin-bottom: 0;
+}
+
+header p {
+  text-align: center;
+  margin: 0;
 }
 
 /*
