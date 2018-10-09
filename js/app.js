@@ -189,4 +189,6 @@ document.querySelector(".restart").addEventListener('click', function(e) {
   shuffleDeck(deck);
   move_counter = 0;
   document.querySelector(".moves").textContent = move_counter;
+  game_started = 0;
+  game_completed = 0;
 })
