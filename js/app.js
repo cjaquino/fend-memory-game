@@ -10,6 +10,31 @@ const deck = ["fa-diamond","fa-diamond",
               "fa-bicycle","fa-bicycle",
               "fa-bomb","fa-bomb"]
 
+//select deck class
+const deck_element = document.querySelector(".deck");
+
+// Get the modal elements
+const modal = document.getElementById('myModal');
+const modal_close = document.getElementById("modal_close");
+const modal_stars = document.getElementById("modal_stars");
+const modal_time = document.getElementById("modal_time");
+
+let num_matches = 8;
+
+//declare empty open cards array to store open cards
+let open_card = [];
+
+//declare counter
+let move_counter = 0;
+let num_stars = 3;
+
+//timer variables
+let game_started = 0;
+let game_completed = 0;
+let start_time = Date.now();
+const seconds = document.getElementById("seconds");
+const minutes = document.getElementById("minutes");
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -25,8 +50,6 @@ function shuffle(array) {
     return array;
 }
 
-//select deck class
-const deck_element = document.querySelector(".deck");
 
 /*
  * Display the cards on the page
@@ -58,8 +81,6 @@ const deck_element = document.querySelector(".deck");
    deck_element.innerHTML = "";
    deck_element.appendChild(fragment);
  }
-
-shuffleDeck(deck);
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -111,28 +132,6 @@ function cardNotMatched(e, open_card) {
   // e.target.setAttribute('class','card');
 }
 
-let num_matches = 8;
-
-// https://www.w3schools.com/howto/howto_css_modals.asp
-// Get the modal elements
-const modal = document.getElementById('myModal');
-const modal_close = document.getElementById("modal_close");
-const modal_stars = document.getElementById("modal_stars");
-const modal_time = document.getElementById("modal_time");
-
-// When the user clicks on <span> (x), close the modal
-modal_close.addEventListener("click", function() {
-  reset_game();  
-  modal.style.display = "none";
-});
-
-// When the user clicks anywhere outside of the modal, close it
-window.addEventListener("click", function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-})
-
 function cardMatched(e, open_card) {
   open_card[0].classList.toggle('show');
   open_card[0].classList.toggle('open');
@@ -140,8 +139,10 @@ function cardMatched(e, open_card) {
   e.target.classList.toggle('show');
   e.target.classList.toggle('open');
   e.target.classList.toggle('match');
+
   open_card.pop();
   num_matches--;
+
   if(!num_matches){
     game_started = 0;
     game_completed = 1;
@@ -162,13 +163,6 @@ function cardMatched(e, open_card) {
   }
 }
 
-//declare empty open cards array to store open cards
-let open_card = [];
-
-//declare counter
-let move_counter = 0;
-let num_stars = 3;
-
 function incrementCounter() {
   move_counter++;
   document.querySelector(".moves").textContent = move_counter;
@@ -181,14 +175,17 @@ function incrementCounter() {
   }
 }
 
+function reset_game() {
+  shuffleDeck(deck);
+  move_counter = 0;
+  document.querySelector(".moves").textContent = move_counter;
+  game_started = 0;
+  game_completed = 0;
+  seconds.innerHTML = 0;
+  minutes.innerHTML = 0;
+}
+
 //timer based off of stack overflow solution:https://stackoverflow.com/questions/29971898/how-to-create-an-accurate-timer-in-javascript
-let game_started = 0;
-let game_completed = 0;
-let start_time = Date.now();
-const seconds = document.getElementById("seconds");
-const minutes = document.getElementById("minutes");
-
-
 function timer() {
   if (game_started){
     const raw_millis = Date.now() - start_time;
@@ -200,16 +197,16 @@ function timer() {
   }
 }
 
+shuffleDeck(deck);
+
 setInterval(timer, 1000);
 
 deck_element.addEventListener('click', function(e){
   if(e.target.nodeName ===  'LI') {
-    //if game hast been started, start timer
+    //if game hasn't been started, start timer
     if (!game_started) {
       game_started = 1;
       start_time = Date.now();
-      // setInterval(timer(start_time),1000);
-      // console.log("timer started");
     }
     if(!e.target.classList.contains("open")){
       openCard(e);
@@ -222,19 +219,20 @@ deck_element.addEventListener('click', function(e){
     }
 
   }
-
-  //check if all cards are matched and display message with final score
 });
-
-function reset_game() {
-  shuffleDeck(deck);
-  move_counter = 0;
-  document.querySelector(".moves").textContent = move_counter;
-  game_started = 0;
-  game_completed = 0;
-  seconds.innerHTML = 0;
-  minutes.innerHTML = 0;
-}
 
 //reset the game. Close and shuffle cards
 document.querySelector(".restart").addEventListener('click', reset_game);
+
+//modal derived from https://www.w3schools.com/howto/howto_css_modals.asp
+modal_close.addEventListener("click", function() {
+  reset_game();
+  modal.style.display = "none";
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener("click", function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+})
