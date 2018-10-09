@@ -122,7 +122,8 @@ const modal_time = document.getElementById("modal_time");
 
 // When the user clicks on <span> (x), close the modal
 modal_close.addEventListener("click", function() {
-    modal.style.display = "none";
+  reset_game();  
+  modal.style.display = "none";
 });
 
 // When the user clicks anywhere outside of the modal, close it
