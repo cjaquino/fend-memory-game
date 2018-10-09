@@ -111,6 +111,8 @@ function cardNotMatched(e, open_card) {
   // e.target.setAttribute('class','card');
 }
 
+let num_matches = 8;
+
 function cardMatched(e, open_card) {
   open_card[0].classList.toggle('show');
   open_card[0].classList.toggle('open');
@@ -119,6 +121,11 @@ function cardMatched(e, open_card) {
   e.target.classList.toggle('open');
   e.target.classList.toggle('match');
   open_card.pop();
+  num_matches--;
+  if(!num_matches){
+    game_started = 0;
+    game_completed = 1;
+  }
 }
 
 //declare empty open cards array to store open cards
