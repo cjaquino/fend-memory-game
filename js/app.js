@@ -183,6 +183,8 @@ function reset_game() {
   game_completed = 0;
   seconds.innerHTML = 0;
   minutes.innerHTML = 0;
+  num_stars = 3;
+  num_matches = 8;
 }
 
 //timer based off of stack overflow solution:https://stackoverflow.com/questions/29971898/how-to-create-an-accurate-timer-in-javascript
@@ -235,6 +237,4 @@ window.addEventListener("click", function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-
-    reset_game();
 })
